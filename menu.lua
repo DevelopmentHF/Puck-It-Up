@@ -52,14 +52,14 @@ function scene:create( event )
 	)
 	uiGroup:insert(playButton)
 	playButton.x = display.contentCenterX
-	playButton.y = display.contentCenterY
+	playButton.y = display.contentCenterY + 25
 
 	-- Adds big settings button 
 	settingsButton = widget.newButton(
 		{
 			onEvent = gotoSettings,
-			width = 144,
-			height = 96,
+			width = 89 * 1.25,
+			height = 44 * 1.25,
 			defaultFile = "sprites/settings.png",
 			overFile = "sprites/pressedSettings.png",
 		}
