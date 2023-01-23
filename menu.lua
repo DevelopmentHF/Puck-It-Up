@@ -68,11 +68,6 @@ function scene:create( event )
 	settingsButton.x = display.contentCenterX
 	settingsButton.y = display.contentCenterY + 125
 
-	-- Add in header image
-	local header = display.newImageRect(backGroup, "sprites/header.png", 104*2, 84*2)
-	header.x = display.contentCenterX
-	header.y = display.contentCenterY - 125
-
 
 end
 
