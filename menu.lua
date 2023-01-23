@@ -12,6 +12,8 @@ local scene = composer.newScene()
 local function goToGame()
 end
 
+local function goToSettings()
+end
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -50,7 +52,21 @@ function scene:create( event )
 	)
 	uiGroup:insert(playButton)
 	playButton.x = display.contentCenterX
-	playButton.y = display.contentCenterY + 50
+	playButton.y = display.contentCenterY
+
+	-- Adds big settings button 
+	settingsButton = widget.newButton(
+		{
+			onEvent = gotoSettings,
+			width = 144,
+			height = 96,
+			defaultFile = "sprites/settings.png",
+			overFile = "sprites/pressedSettings.png",
+		}
+	)
+	uiGroup:insert(settingsButton)
+	settingsButton.x = display.contentCenterX
+	settingsButton.y = display.contentCenterY + 125
 
 
 end
