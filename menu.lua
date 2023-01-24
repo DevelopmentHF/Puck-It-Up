@@ -9,10 +9,12 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
-local function goToGame()
+local function goToSelection()
+	composer.gotoScene("selection",{time=300, effect="crossFade"});
 end
 
 local function goToSettings()
+	composer.gotoScene("settings",{time=300, effect="crossFade"});
 end
 
 -- -----------------------------------------------------------------------------------
@@ -43,7 +45,7 @@ function scene:create( event )
 	-- Adds big play button 
 	playButton = widget.newButton(
 		{
-			onEvent = gotoGame,
+			onEvent = goToSelection,
 			width = 144,
 			height = 96,
 			defaultFile = "sprites/play.png",
@@ -57,7 +59,7 @@ function scene:create( event )
 	-- Adds big settings button 
 	settingsButton = widget.newButton(
 		{
-			onEvent = gotoSettings,
+			onEvent = goToSettings,
 			width = 89 * 1.25,
 			height = 44 * 1.25,
 			defaultFile = "sprites/settings.png",

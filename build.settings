@@ -5,6 +5,10 @@
 
 settings =
 {
+	splashScreen = 
+    {
+        enable = false
+    },
 	orientation =
 	{
 		-- Supported values for orientation:
@@ -53,9 +57,5 @@ settings =
 		-- Exclude unnecessary files for each platform
 		all = { "Icon.png", "Icon-*dpi.png", "Images.xcassets", },
 		android = { "LaunchScreen.storyboardc", },
-	},
-
-	splashScreen {
-		enable = false
 	},
 }

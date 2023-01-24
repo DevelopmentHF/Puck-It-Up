@@ -1,6 +1,6 @@
 
 local composer = require( "composer" )
-
+local widget = require("widget")
 local scene = composer.newScene()
 
 -- -----------------------------------------------------------------------------------
@@ -8,7 +8,9 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
-
+local function goToMenu()
+	composer.gotoScene("menu",{time=300, effect="crossFade"});
+end
 
 
 -- -----------------------------------------------------------------------------------
@@ -20,6 +22,36 @@ function scene:create( event )
 
 	local sceneGroup = self.view
 	-- Code here runs when the scene is first created but has not yet appeared on screen
+
+	-- Set up display groups
+	backGroup = display.newGroup() -- display group for background image
+	sceneGroup:insert(backGroup)
+
+	mainGroup = display.newGroup() -- display group for ship, asteroids, lasers etc
+	sceneGroup:insert(mainGroup)
+
+	uiGroup = display.newGroup() -- display group for UI objects like score
+	sceneGroup:insert(uiGroup)
+
+	-- Load in background in correct pos/display group
+	local background = display.newImageRect(backGroup, "sprites/mainBg.png", 320, 480)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
+
+	-- Adds big back button 
+	backButton = widget.newButton(
+		{
+			onEvent = goToMenu,
+			width = 144 / 2,
+			height = 96 / 2,
+			defaultFile = "sprites/back.png",
+			overFile = "sprites/pressedBack.png",
+		}
+	)
+	-- Top right corner of devices
+	uiGroup:insert(backButton)
+	backButton.x = display.screenOriginX + 50
+	backButton.y = display.screenOriginY + 50
 
 end
 
