@@ -9,6 +9,7 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+-- Switch scene functions
 local function goToSelection()
 	composer.gotoScene("selection",{time=500, effect="crossFade"});
 end
