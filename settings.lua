@@ -8,7 +8,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 local function goToMenu()
-	composer.gotoScene("menu",{time=300, effect="crossFade"});
+	composer.gotoScene("menu",{time=500, effect="crossFade"});
 end
 
 -- -----------------------------------------------------------------------------------

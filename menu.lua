@@ -10,13 +10,16 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 
 local function goToSelection()
-	composer.gotoScene("selection",{time=300, effect="crossFade"});
+	composer.gotoScene("selection",{time=500, effect="crossFade"});
 end
 
 local function goToSettings()
-	composer.gotoScene("settings",{time=300, effect="crossFade"});
+	composer.gotoScene("settings",{time=500, effect="crossFade"});
 end
 
+local function visitWebsite()
+	system.openURL("https://github.com/DevelopmentHF/Puck-It-Up");
+end
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -74,6 +77,20 @@ function scene:create( event )
 	local puck = display.newImageRect(mainGroup, "sprites/logoPuck.png", 573/3, 231/3)
 	puck.x = display.contentCenterX 
 	puck.y = display.contentCenterY - 150
+
+	-- Adds github navigation button 
+	gitButton = widget.newButton(
+		{
+			onEvent = visitWebsite,
+			width = 32,
+			height = 32,
+			defaultFile = "sprites/github.png",
+			overFile = "sprites/github.png",
+		}
+	)
+	uiGroup:insert(gitButton)
+	gitButton.x = display.screenOriginX + display.actualContentWidth - 25
+	gitButton.y = display.screenOriginY + display.actualContentHeight - 25
 end
 
 
