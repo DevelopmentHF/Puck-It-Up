@@ -143,7 +143,7 @@ function scene:create( event )
 	-- right bottom
 	RBarrowButton = widget.newButton(
 		{
-			onPress = function() bottomChoice = bottomChoice + 1 end,
+			onPress = function() bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -171,7 +171,7 @@ function scene:create( event )
 	-- right top
 	RTarrowButton = widget.newButton(
 		{
-			onPress = function() topChoice = topChoice + 1 end,
+			onPress = function() topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
