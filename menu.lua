@@ -68,7 +68,10 @@ function scene:create( event )
 	settingsButton.x = display.contentCenterX
 	settingsButton.y = display.contentCenterY + 125
 
-
+	-- Load in puck for logo in correct pos/display group
+	local puck = display.newImageRect(mainGroup, "sprites/logoPuck.png", 573/3, 231/3)
+	puck.x = display.contentCenterX 
+	puck.y = display.contentCenterY - 150
 end
 
 
