@@ -58,7 +58,7 @@ function scene:create( event )
 	)
 	uiGroup:insert(playButton)
 	playButton.x = display.contentCenterX
-	playButton.y = display.contentCenterY + 25
+	playButton.y = display.actualContentHeight - 150
 
 	-- Adds big settings button 
 	settingsButton = widget.newButton(
@@ -72,7 +72,7 @@ function scene:create( event )
 	)
 	uiGroup:insert(settingsButton)
 	settingsButton.x = display.contentCenterX
-	settingsButton.y = display.contentCenterY + 125
+	settingsButton.y = display.actualContentHeight - 55
 
 	-- Load in puck for logo in correct pos/display group
 	local puck = display.newImageRect(mainGroup, "sprites/logoPuck.png", 573/3, 231/3)
