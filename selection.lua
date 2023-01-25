@@ -148,7 +148,7 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(RBarrowButton)
-	RBarrowButton.x = display.screenOriginX + display.actualContentWidth - 34 - 20	-- 20px in from edge of device screen
+	RBarrowButton.x = display.contentCenterX + 72
 	RBarrowButton.y = display.contentCenterY + 52 	-- 52 aligns to middle of paddle 
 
 	-- left bottom
@@ -162,7 +162,7 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(LBarrowButton)
-	LBarrowButton.x = display.screenOriginX + 34 + 20	-- 20px in from edge of device screen
+	LBarrowButton.x = display.contentCenterX - 70	-- 2 less to account for shadow
 	LBarrowButton.y = display.contentCenterY + 52	-- 52 aligns to middle of paddle 
 
 	-- right top
@@ -176,7 +176,7 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(RTarrowButton)
-	RTarrowButton.x = display.screenOriginX + display.actualContentWidth - 34 - 20	-- 20px in from edge of device screen
+	RTarrowButton.x = display.contentCenterX + 72 -- 20px in from edge of device screen
 	RTarrowButton.y = display.contentCenterY - 48	-- 48 aligns to middle of paddle 
 
 	-- left top
@@ -190,7 +190,7 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(LTarrowButton)
-	LTarrowButton.x = display.screenOriginX + 34 + 20	-- 20px in from edge of device screen
+	LTarrowButton.x = display.contentCenterX - 70	-- 20px in from edge of device screen
 	LTarrowButton.y = display.contentCenterY - 48	-- 48 aligns to middle of paddle 
 end
 
