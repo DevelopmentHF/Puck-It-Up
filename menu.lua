@@ -82,7 +82,7 @@ function scene:create( event )
 	-- Adds github navigation button 
 	gitButton = widget.newButton(
 		{
-			onEvent = visitWebsite,
+			onPress = visitWebsite,
 			width = 32,
 			height = 32,
 			defaultFile = "sprites/github.png",
