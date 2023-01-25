@@ -36,9 +36,6 @@ function shallowcopy(orig)
 end
 
 local function sceneLoop()
-	print(topChoice)
-	print(bottomChoice)
-
 	-- Check which puck to display
 	for i=1, numPaddles do
 		if i == topChoice then
@@ -151,8 +148,8 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(RBarrowButton)
-	RBarrowButton.x = display.contentCenterX + 75
-	RBarrowButton.y = display.contentCenterY + 52
+	RBarrowButton.x = display.screenOriginX + display.actualContentWidth - 34 - 20	-- 20px in from edge of device screen
+	RBarrowButton.y = display.contentCenterY + 52 	-- 52 aligns to middle of paddle 
 
 	-- left bottom
 	LBarrowButton = widget.newButton(
@@ -165,8 +162,8 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(LBarrowButton)
-	LBarrowButton.x = display.contentCenterX - 75
-	LBarrowButton.y = display.contentCenterY + 52
+	LBarrowButton.x = display.screenOriginX + 34 + 20	-- 20px in from edge of device screen
+	LBarrowButton.y = display.contentCenterY + 52	-- 52 aligns to middle of paddle 
 
 	-- right top
 	RTarrowButton = widget.newButton(
@@ -179,8 +176,8 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(RTarrowButton)
-	RTarrowButton.x = display.contentCenterX + 75
-	RTarrowButton.y = display.contentCenterY - 52
+	RTarrowButton.x = display.screenOriginX + display.actualContentWidth - 34 - 20	-- 20px in from edge of device screen
+	RTarrowButton.y = display.contentCenterY - 48	-- 48 aligns to middle of paddle 
 
 	-- left top
 	LTarrowButton = widget.newButton(
@@ -193,8 +190,8 @@ function scene:create( event )
 		}
 	)
 	uiGroup:insert(LTarrowButton)
-	LTarrowButton.x = display.contentCenterX - 75
-	LTarrowButton.y = display.contentCenterY - 52
+	LTarrowButton.x = display.screenOriginX + 34 + 20	-- 20px in from edge of device screen
+	LTarrowButton.y = display.contentCenterY - 48	-- 48 aligns to middle of paddle 
 end
 
 
