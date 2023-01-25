@@ -20,6 +20,11 @@ local function goToMenu()
 	composer.gotoScene("menu",{time=500, effect="crossFade"});
 end
 
+-- Switches scenes to go into the main game
+local function goToGame()
+	composer.gotoScene("game",{time=500, effect="crossFade"});
+end
+
 -- Retuns a shallow copy of an original table
 function shallowcopy(orig)
     local orig_type = type(orig)
@@ -192,6 +197,20 @@ function scene:create( event )
 	uiGroup:insert(LTarrowButton)
 	LTarrowButton.x = display.contentCenterX - 70	-- 20px in from edge of device screen
 	LTarrowButton.y = display.contentCenterY - 48	-- 48 aligns to middle of paddle 
+
+	-- Adds big play button 
+	goButton = widget.newButton(
+		{
+			onEvent = goToGame,
+			width = 41 * 2,
+			height = 43 * 2,
+			defaultFile = "sprites/go.png",
+			overFile = "sprites/pressedGo.png",
+		}
+	)
+	uiGroup:insert(goButton)
+	goButton.x = display.contentCenterX + 2	-- +2 to account for shadow
+	goButton.y = display.actualContentHeight - 75
 end
 
 
