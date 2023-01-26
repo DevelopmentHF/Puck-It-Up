@@ -51,6 +51,34 @@ function scene:create( event )
 	backButton.x = display.screenOriginX + 50
 	backButton.y = display.screenOriginY + 50
 
+	-- Add sound off switch
+	soundOffSwitch = widget.newButton(
+		{
+			onRelease = function() soundOffSwitch.isVisible = false; soundOnSwitch.isVisible = true end,
+			width = 170/2,
+			height = 170/2,
+			defaultFile = "sprites/soundOff.png",
+			overFile = "sprites/soundOffPressed.png",
+		}
+	)
+	uiGroup:insert(soundOffSwitch)
+	soundOffSwitch.x = display.contentCenterX
+	soundOffSwitch.y = display.contentCenterY - 100
+
+	-- Add sound on switch
+	soundOnSwitch = widget.newButton(
+		{
+			onRelease = function() soundOnSwitch.isVisible = false; soundOffSwitch.isVisible = true end,
+			width = 170/2,
+			height = 170/2,
+			defaultFile = "sprites/soundOn.png",
+			overFile = "sprites/soundOnpressed.png",
+		}
+	)
+	uiGroup:insert(soundOnSwitch)
+	soundOnSwitch.x = display.contentCenterX
+	soundOnSwitch.y = display.contentCenterY - 100
+	
 end
 
 
