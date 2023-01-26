@@ -79,6 +79,34 @@ function scene:create( event )
 	soundOnSwitch.x = display.contentCenterX
 	soundOnSwitch.y = display.contentCenterY - 100
 
+	-- Add music off switch
+	musicOffSwitch = widget.newButton(
+		{
+			onRelease = function() musicOffSwitch.isVisible = false; musicOnSwitch.isVisible = true end,
+			width = 170/2,
+			height = 170/2,
+			defaultFile = "sprites/musicOff.png",
+			overFile = "sprites/musicOffPressed.png",
+		}
+	)
+	uiGroup:insert(musicOffSwitch)
+	musicOffSwitch.x = display.contentCenterX
+	musicOffSwitch.y = display.contentCenterY + 100
+
+	-- Add music on switch
+	musicOnSwitch = widget.newButton(
+		{
+			onRelease = function() musicOnSwitch.isVisible = false; musicOffSwitch.isVisible = true end,
+			width = 170/2,
+			height = 170/2,
+			defaultFile = "sprites/musicOn.png",
+			overFile = "sprites/musicOnPressed.png"
+		}
+	)
+	uiGroup:insert(musicOnSwitch)
+	musicOnSwitch.x = display.contentCenterX
+	musicOnSwitch.y = display.contentCenterY + 100
+
 end
 
 
