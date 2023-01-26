@@ -78,7 +78,7 @@ function scene:create( event )
 	uiGroup:insert(soundOnSwitch)
 	soundOnSwitch.x = display.contentCenterX
 	soundOnSwitch.y = display.contentCenterY - 100
-	
+
 end
 
 
