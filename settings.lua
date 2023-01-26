@@ -72,7 +72,7 @@ function scene:create( event )
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/soundOn.png",
-			overFile = "sprites/soundOnpressed.png",
+			overFile = "sprites/soundOnPressed.png",
 		}
 	)
 	uiGroup:insert(soundOnSwitch)
