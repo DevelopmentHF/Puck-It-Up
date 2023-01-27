@@ -203,7 +203,7 @@ function scene:create( event )
 	-- Adds big play button 
 	goButton = widget.newButton(
 		{
-			onEvent = audio.play(buttonSound); goToGame,
+			onEvent = goToGame,
 			width = 41 * 2,
 			height = 43 * 2,
 			defaultFile = "sprites/go.png",
@@ -245,7 +245,7 @@ function scene:hide( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
-
+		
 	end
 end
 
