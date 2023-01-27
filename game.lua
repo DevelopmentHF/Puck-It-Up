@@ -21,6 +21,22 @@ function scene:create( event )
 	local sceneGroup = self.view
 	-- Code here runs when the scene is first created but has not yet appeared on screen
 
+	-- Set up display groups
+	backGroup = display.newGroup() -- display group for background image
+	sceneGroup:insert(backGroup)
+
+	mainGroup = display.newGroup() -- display group for ship, asteroids, lasers etc
+	sceneGroup:insert(mainGroup)
+
+	uiGroup = display.newGroup() -- display group for UI objects like score
+	sceneGroup:insert(uiGroup)
+
+	-- Load in background in correct pos/display group
+	local background = display.newImageRect(backGroup, "sprites/mainBg.png", 320, 480)
+	background.x = display.contentCenterX
+	background.y = display.contentCenterY
+
+	
 end
 
 
