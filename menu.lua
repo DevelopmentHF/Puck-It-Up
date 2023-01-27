@@ -49,7 +49,7 @@ function scene:create( event )
 	-- Adds big play button 
 	playButton = widget.newButton(
 		{
-			onEvent = goToSelection,
+			onPress = goToSelection,
 			width = 144,
 			height = 96,
 			defaultFile = "sprites/play.png",

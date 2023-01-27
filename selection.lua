@@ -87,7 +87,7 @@ function scene:create( event )
 	-- Adds big back button 
 	backButton = widget.newButton(
 		{
-			onEvent = goToMenu,
+			onPress = goToMenu,
 			width = 144 / 2,
 			height = 96 / 2,
 			defaultFile = "sprites/back.png",
@@ -243,7 +243,7 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-
+		audio.play(buttonSound)
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 		
