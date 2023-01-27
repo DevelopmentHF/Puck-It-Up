@@ -15,7 +15,7 @@ local topChoice = 1
 local bottomChoice = 1
 local gameLoopTimer
 
-local buttonSound
+local buttonSound -- Sound when button is pressed
 
 -- Switches scenes to the menu scene
 local function goToMenu()
@@ -214,6 +214,7 @@ function scene:create( event )
 	goButton.x = display.contentCenterX + 2	-- +2 to account for shadow
 	goButton.y = display.actualContentHeight - 75
 
+	-- Load buttonSound and set volume to 0.5
 	buttonSound = audio.loadSound("audio/buttonSound.wav")
 	audio.setVolume(0.5, buttonSound)
 end

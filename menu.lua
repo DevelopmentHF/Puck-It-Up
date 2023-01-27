@@ -9,6 +9,8 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
+local buttonSound -- Sound when button is pressed
+
 -- Switch scene functions
 local function goToSelection()
 	composer.gotoScene("selection",{time=500, effect="crossFade"});
@@ -63,7 +65,7 @@ function scene:create( event )
 	-- Adds big settings button 
 	settingsButton = widget.newButton(
 		{
-			onEvent = goToSettings,
+			onPress = goToSettings,
 			width = 89 * 1.25,
 			height = 44 * 1.25,
 			defaultFile = "sprites/settings.png",
@@ -92,6 +94,10 @@ function scene:create( event )
 	uiGroup:insert(gitButton)
 	gitButton.x = display.screenOriginX + display.actualContentWidth - 25
 	gitButton.y = display.screenOriginY + display.actualContentHeight - 25
+
+	-- Load buttonSound and set volume to 0.5
+	buttonSound = audio.loadSound("audio/buttonSound.wav")
+	audio.setVolume(0.5, buttonSound)
 end
 
 
@@ -119,7 +125,7 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-
+		audio.play(buttonSound)
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 
