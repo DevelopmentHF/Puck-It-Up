@@ -15,6 +15,8 @@ local topChoice = 1
 local bottomChoice = 1
 local gameLoopTimer
 
+local buttonSound
+
 -- Switches scenes to the menu scene
 local function goToMenu()
 	composer.gotoScene("menu",{time=500, effect="crossFade"});
@@ -145,7 +147,7 @@ function scene:create( event )
 	-- right bottom
 	RBarrowButton = widget.newButton(
 		{
-			onPress = function() bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
+			onPress = function() audio.play(buttonSound); bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -159,7 +161,7 @@ function scene:create( event )
 	-- left bottom
 	LBarrowButton = widget.newButton(
 		{
-			onPress = function() bottomChoice = bottomChoice - 1; if bottomChoice<1 then bottomChoice = 1 end end,
+			onPress = function() audio.play(buttonSound); bottomChoice = bottomChoice - 1; if bottomChoice<1 then bottomChoice = 1 end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/leftArrow.png",
@@ -173,7 +175,7 @@ function scene:create( event )
 	-- right top
 	RTarrowButton = widget.newButton(
 		{
-			onPress = function() topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
+			onPress = function() audio.play(buttonSound); topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -187,7 +189,7 @@ function scene:create( event )
 	-- left top
 	LTarrowButton = widget.newButton(
 		{
-			onPress = function() topChoice = topChoice - 1; if topChoice<1 then topChoice = 1 end end,
+			onPress = function() audio.play(buttonSound); topChoice = topChoice - 1; if topChoice<1 then topChoice = 1 end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/leftArrow.png",
@@ -201,7 +203,7 @@ function scene:create( event )
 	-- Adds big play button 
 	goButton = widget.newButton(
 		{
-			onEvent = goToGame,
+			onEvent = audio.play(buttonSound); goToGame,
 			width = 41 * 2,
 			height = 43 * 2,
 			defaultFile = "sprites/go.png",
@@ -211,6 +213,8 @@ function scene:create( event )
 	uiGroup:insert(goButton)
 	goButton.x = display.contentCenterX + 2	-- +2 to account for shadow
 	goButton.y = display.actualContentHeight - 75
+
+	buttonSound = audio.loadSound("audio/buttonSound.wav")
 end
 
 
