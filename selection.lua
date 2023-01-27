@@ -215,6 +215,7 @@ function scene:create( event )
 	goButton.y = display.actualContentHeight - 75
 
 	buttonSound = audio.loadSound("audio/buttonSound.wav")
+	audio.setVolume(0.5, buttonSound)
 end
 
 
