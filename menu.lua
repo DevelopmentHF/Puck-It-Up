@@ -11,6 +11,8 @@ local scene = composer.newScene()
 
 local buttonSound -- Sound when button is pressed
 
+composer.setVariable("soundOn", true)
+
 -- Switch scene functions
 local function goToSelection()
 	composer.gotoScene("selection",{time=500, effect="crossFade"});

@@ -19,6 +19,8 @@ local buttonPress -- Sound when button is pressed
 local buttonRelease -- Sound when button is released
 local buttonSound -- Above 2 added together, for scene changing buttons
 
+composer.setVariable("soundOn", true)
+
 -- Switches scenes to the menu scene
 local function goToMenu()
 	composer.gotoScene("menu",{time=500, effect="crossFade"});
