@@ -149,8 +149,8 @@ function scene:create( event )
 	-- right bottom
 	RBarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress); bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
-			onRelease = function() audio.play(buttonRelease) end,
+			onPress = function() if composer.getVariable("soundOn") == true then audio.play(buttonPress) end; bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
+			onRelease = function() if composer.getVariable("soundOn") == true then audio.play(buttonRelease) end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -164,8 +164,8 @@ function scene:create( event )
 	-- left bottom
 	LBarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress); bottomChoice = bottomChoice - 1; if bottomChoice<1 then bottomChoice = 1 end end,
-			onRelease = function() audio.play(buttonRelease) end,
+			onPress = function() if composer.getVariable("soundOn") == true then audio.play(buttonPress) end; bottomChoice = bottomChoice - 1; if bottomChoice<1 then bottomChoice = 1 end end,
+			onRelease = function() if composer.getVariable("soundOn") == true then audio.play(buttonRelease) end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/leftArrow.png",
@@ -179,8 +179,8 @@ function scene:create( event )
 	-- right top
 	RTarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress); topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
-			onRelease = function() audio.play(buttonRelease) end,
+			onPress = function() if composer.getVariable("soundOn") == true then audio.play(buttonPress) end; topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
+			onRelease = function() if composer.getVariable("soundOn") == true then audio.play(buttonRelease) end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -194,8 +194,8 @@ function scene:create( event )
 	-- left top
 	LTarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress); topChoice = topChoice - 1; if topChoice<1 then topChoice = 1 end end,
-			onRelease = function() audio.play(buttonRelease) end,
+			onPress = function() if composer.getVariable("soundOn") == true then audio.play(buttonPress) end; topChoice = topChoice - 1; if topChoice<1 then topChoice = 1 end end,
+			onRelease = function() if composer.getVariable("soundOn") == true then audio.play(buttonRelease) end end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/leftArrow.png",
@@ -258,7 +258,7 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-		audio.play(buttonSound)
+		if composer.getVariable("soundOn") == true then audio.play(buttonSound) end
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 		

@@ -11,6 +11,8 @@ local buttonPress -- Sound when button is pressed
 local buttonRelease -- Sound when button is released
 local buttonSound -- Above 2 added together, for scene changing buttons
 
+composer.setVariable("soundOn", true)
+
 local function goToMenu()
 	composer.gotoScene("menu",{time=500, effect="crossFade"});
 end
@@ -58,7 +60,7 @@ function scene:create( event )
 	-- Add sound off switch
 	soundOffSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress) end,
+			onPress = function() composer.setVariable("soundOn", true) end,
 			onRelease = function() audio.play(buttonRelease); soundOffSwitch.isVisible = false; soundOnSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
@@ -74,7 +76,7 @@ function scene:create( event )
 	soundOnSwitch = widget.newButton(
 		{
 			onPress = function() audio.play(buttonPress) end,
-			onRelease = function() audio.play(buttonRelease); soundOnSwitch.isVisible = false; soundOffSwitch.isVisible = true end,
+			onRelease = function() composer.setVariable("soundOn", false); soundOnSwitch.isVisible = false; soundOffSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/soundOn.png",
@@ -88,8 +90,8 @@ function scene:create( event )
 	-- Add music off switch
 	musicOffSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress) end,
-			onRelease = function() audio.play(buttonRelease); musicOffSwitch.isVisible = false; musicOnSwitch.isVisible = true end,
+			onPress = function() if composer.getVariable("soundOn") == true then audio.play(buttonPress) end end,
+			onRelease = function() if composer.getVariable("soundOn") == true then audio.play(buttonRelease) end; musicOffSwitch.isVisible = false; musicOnSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/musicOff.png",
@@ -103,8 +105,8 @@ function scene:create( event )
 	-- Add music on switch
 	musicOnSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonPress) end,
-			onRelease = function() audio.play(buttonRelease); musicOnSwitch.isVisible = false; musicOffSwitch.isVisible = true end,
+			onPress = function() if composer.getVariable("soundOn") == true then audio.play(buttonPress) end end,
+			onRelease = function() if composer.getVariable("soundOn") == true then audio.play(buttonRelease) end; musicOnSwitch.isVisible = false; musicOffSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/musicOn.png",
@@ -153,7 +155,7 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-		audio.play(buttonSound)
+		if composer.getVariable("soundOn") == true then audio.play(buttonSound) end
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 

@@ -125,7 +125,7 @@ function scene:hide( event )
 
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
-		audio.play(buttonSound)
+		if composer.getVariable("soundOn") == true then audio.play(buttonSound) end
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 
