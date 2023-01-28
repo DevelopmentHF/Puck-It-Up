@@ -7,7 +7,9 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
 
-local buttonSound -- Sound when button is pressed
+local buttonPress -- Sound when button is pressed
+local buttonRelease -- Sound when button is released
+local buttonSound -- Above 2 added together, for scene changing buttons
 
 local function goToMenu()
 	composer.gotoScene("menu",{time=500, effect="crossFade"});
@@ -56,8 +58,8 @@ function scene:create( event )
 	-- Add sound off switch
 	soundOffSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound) end,
-			onRelease = function() soundOffSwitch.isVisible = false; soundOnSwitch.isVisible = true end,
+			onPress = function() audio.play(buttonPress) end,
+			onRelease = function() audio.play(buttonRelease); soundOffSwitch.isVisible = false; soundOnSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/soundOff.png",
@@ -71,8 +73,8 @@ function scene:create( event )
 	-- Add sound on switch
 	soundOnSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound) end,
-			onRelease = function() soundOnSwitch.isVisible = false; soundOffSwitch.isVisible = true end,
+			onPress = function() audio.play(buttonPress) end,
+			onRelease = function() audio.play(buttonRelease); soundOnSwitch.isVisible = false; soundOffSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/soundOn.png",
@@ -86,8 +88,8 @@ function scene:create( event )
 	-- Add music off switch
 	musicOffSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound) end,
-			onRelease = function() musicOffSwitch.isVisible = false; musicOnSwitch.isVisible = true end,
+			onPress = function() audio.play(buttonPress) end,
+			onRelease = function() audio.play(buttonRelease); musicOffSwitch.isVisible = false; musicOnSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/musicOff.png",
@@ -101,8 +103,8 @@ function scene:create( event )
 	-- Add music on switch
 	musicOnSwitch = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound) end,
-			onRelease = function() musicOnSwitch.isVisible = false; musicOffSwitch.isVisible = true end,
+			onPress = function() audio.play(buttonPress) end,
+			onRelease = function() audio.play(buttonRelease); musicOnSwitch.isVisible = false; musicOffSwitch.isVisible = true end,
 			width = 170/2,
 			height = 170/2,
 			defaultFile = "sprites/musicOn.png",
@@ -112,6 +114,14 @@ function scene:create( event )
 	uiGroup:insert(musicOnSwitch)
 	musicOnSwitch.x = display.contentCenterX
 	musicOnSwitch.y = display.contentCenterY + 100
+
+	-- Load buttonPress and set volume to 0.5
+	buttonPress = audio.loadSound("audio/buttonPress.wav")
+	audio.setVolume(0.5, buttonPress)
+
+	-- Load buttonRelease and set volume to 0.5
+	buttonRelease = audio.loadSound("audio/buttonRelease.wav")
+	audio.setVolume(0.5, buttonRelease)
 
 	-- Load buttonSound and set volume to 0.5
 	buttonSound = audio.loadSound("audio/buttonSound.wav")

@@ -15,7 +15,9 @@ local topChoice = 1
 local bottomChoice = 1
 local gameLoopTimer
 
-local buttonSound -- Sound when button is pressed
+local buttonPress -- Sound when button is pressed
+local buttonRelease -- Sound when button is released
+local buttonSound -- Above 2 added together, for scene changing buttons
 
 -- Switches scenes to the menu scene
 local function goToMenu()
@@ -147,7 +149,8 @@ function scene:create( event )
 	-- right bottom
 	RBarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound); bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
+			onPress = function() audio.play(buttonPress); bottomChoice = bottomChoice + 1; if bottomChoice > numPaddles then bottomChoice = numPaddles end end,
+			onRelease = function() audio.play(buttonRelease) end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -161,7 +164,8 @@ function scene:create( event )
 	-- left bottom
 	LBarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound); bottomChoice = bottomChoice - 1; if bottomChoice<1 then bottomChoice = 1 end end,
+			onPress = function() audio.play(buttonPress); bottomChoice = bottomChoice - 1; if bottomChoice<1 then bottomChoice = 1 end end,
+			onRelease = function() audio.play(buttonRelease) end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/leftArrow.png",
@@ -175,7 +179,8 @@ function scene:create( event )
 	-- right top
 	RTarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound); topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
+			onPress = function() audio.play(buttonPress); topChoice = topChoice + 1; if topChoice>numPaddles then topChoice = numPaddles end end,
+			onRelease = function() audio.play(buttonRelease) end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/rightArrow.png",
@@ -189,7 +194,8 @@ function scene:create( event )
 	-- left top
 	LTarrowButton = widget.newButton(
 		{
-			onPress = function() audio.play(buttonSound); topChoice = topChoice - 1; if topChoice<1 then topChoice = 1 end end,
+			onPress = function() audio.play(buttonPress); topChoice = topChoice - 1; if topChoice<1 then topChoice = 1 end end,
+			onRelease = function() audio.play(buttonRelease) end,
 			width = 34 * 2,
 			height = 18 * 2,
 			defaultFile = "sprites/leftArrow.png",
@@ -213,6 +219,14 @@ function scene:create( event )
 	uiGroup:insert(goButton)
 	goButton.x = display.contentCenterX + 2	-- +2 to account for shadow
 	goButton.y = display.actualContentHeight - 75
+
+	-- Load buttonPress and set volume to 0.5
+	buttonPress = audio.loadSound("audio/buttonPress.wav")
+	audio.setVolume(0.5, buttonPress)
+
+	-- Load buttonRelease and set volume to 0.5
+	buttonRelease = audio.loadSound("audio/buttonRelease.wav")
+	audio.setVolume(0.5, buttonRelease)
 
 	-- Load buttonSound and set volume to 0.5
 	buttonSound = audio.loadSound("audio/buttonSound.wav")
