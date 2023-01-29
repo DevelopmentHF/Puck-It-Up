@@ -7,8 +7,45 @@ local scene = composer.newScene()
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
+local puck
+-- Load in selected paddles from the selection screen
+local topPaddle = composer.getVariable("topSelectedPaddle")
+local botPaddle = composer.getVariable("botSelectedPaddle")
 
+-- Init. physics engine
+local physics = require("physics")
+physics.start()
+physics.setGravity(0,0)
 
+-- Allows for the dragging of paddles on screen -> credit to someone one forum
+local function dragger( self, event )
+		local phase = event.phase
+		local id 	= event.id
+		if( phase == "began" ) then
+			self.isFocus = true
+			self.tempJoint = physics.newJoint( "touch", self, self.x, self.y )
+			self.tempJoint.maxForce = 1e6
+			self.tempJoint.dampingRatio = 0
+			self.tempJoint.frequency = 2000
+			display.currentStage:setFocus( self, id )
+		elseif( self.isFocus ) then
+			self.tempJoint:setTarget( event.x, event.y )
+			if( phase == "ended" or phase == "cancelled" ) then
+				self.isFocus = false
+				display.currentStage:setFocus( self, nil )
+				display.remove( self.tempJoint ) 
+			end	
+		end
+		return false
+end
+
+-- Caculate x,y edges of bounds
+
+local paddleRadius = 30
+local minYTop = 0
+local maxYTop = 240
+local minYBot = maxYTop
+local maxYBot = 480
 
 
 -- -----------------------------------------------------------------------------------
@@ -36,7 +73,41 @@ function scene:create( event )
 	background.x = display.contentCenterX
 	background.y = display.contentCenterY
 
-	
+	-- Place paddles in their starting positions with physics added
+	mainGroup:insert(topPaddle)
+	topPaddle.x = display.contentCenterX
+	topPaddle.y = display.contentCenterY - 100
+	physics.addBody(topPaddle, "dynamic", {radius=30})
+	topPaddle.touch = dragger
+	topPaddle:addEventListener("touch")	
+
+	mainGroup:insert(botPaddle)
+	botPaddle.x = display.contentCenterX
+	botPaddle.y = display.contentCenterY + 100
+	physics.addBody(botPaddle, "dynamic", {radius=30})
+	botPaddle.touch = dragger
+	botPaddle:addEventListener("touch")	
+
+	-- Load in puck with physics and correct position
+	puck = display.newImageRect(mainGroup, "sprites/puck.png", 160/4, 160/4)
+	puck.x = display.contentCenterX
+	puck.y = display.contentCenterY
+	physics.addBody(puck, "dynamic", {radius=20})
+	puck.linearDamping = 1.1
+	puck.isBullet = true
+
+	-- Add and enterFrame Listener to help limit movement
+	function topPaddle.enterFrame( self )
+		-- if (self.x < minX + paddleRadius) then self.x = minX end
+		-- if (self.x > maxX - paddleRadius) then self.x = maxX end
+		if (self.y < minYTop) then self.y = minYTop end
+		if (self.y > maxYTop) then self.y = maxYTop end
+	end
+
+	function botPaddle.enterFrame(self)
+		if (self.y > maxYBot) then self.y = maxYBot end
+		if (self.y < minYBot) then self.y = minYBot end
+	end
 end
 
 
@@ -51,7 +122,8 @@ function scene:show( event )
 
 	elseif ( phase == "did" ) then
 		-- Code here runs when the scene is entirely on screen
-
+		Runtime:addEventListener("enterFrame", topPaddle)
+		Runtime:addEventListener("enterFrame", botPaddle)
 	end
 end
 

@@ -63,6 +63,7 @@ local function sceneLoop()
 
 	end
 end
+
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -233,6 +234,7 @@ function scene:create( event )
 	-- Load buttonSound and set volume to 0.5
 	buttonSound = audio.loadSound("audio/buttonSound.wav")
 	audio.setVolume(0.5, buttonSound)
+
 end
 
 
@@ -261,6 +263,9 @@ function scene:hide( event )
 	if ( phase == "will" ) then
 		-- Code here runs when the scene is on screen (but is about to go off screen)
 		if composer.getVariable("soundOn") == true then audio.play(buttonSound) end
+		-- Set composer variable for selected pucks
+	composer.setVariable("topSelectedPaddle", potentialPaddlesTop[topChoice])
+	composer.setVariable("botSelectedPaddle", potentialPaddlesBot[bottomChoice])
 	elseif ( phase == "did" ) then
 		-- Code here runs immediately after the scene goes entirely off screen
 		
