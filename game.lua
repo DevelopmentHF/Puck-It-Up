@@ -46,7 +46,8 @@ local minYTop = 0
 local maxYTop = 240
 local minYBot = maxYTop
 local maxYBot = 480
-
+local minX = 0
+local maxX = display.actualContentWidth + display.screenOriginX
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -96,18 +97,45 @@ function scene:create( event )
 	puck.linearDamping = 1.1
 	puck.isBullet = true
 
+	-- Add in bounding walls
+	local left = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
+	left.x = display.screenOriginX 
+	left.y = 240
+	physics.addBody(left, "static")
+
+	local right = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
+	right.x = display.screenOriginX + display.actualContentWidth
+	right.y = 240
+	physics.addBody(right, "static")
+
+	local top = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
+	top:rotate(90)
+	top.x = display.screenOriginX
+	top.y = display.screenOriginY
+	physics.addBody(top, "static")
+	
+	local bot = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
+	bot:rotate(90)
+	bot.x = display.screenOriginX
+	bot.y = display.screenOriginY + display.actualContentHeight
+	physics.addBody(bot, "static")
+
 	-- Add and enterFrame Listener to help limit movement
 	function topPaddle.enterFrame( self )
-		-- if (self.x < minX + paddleRadius) then self.x = minX end
-		-- if (self.x > maxX - paddleRadius) then self.x = maxX end
 		if (self.y < minYTop) then self.y = minYTop end
 		if (self.y > maxYTop) then self.y = maxYTop end
+		if (self.x < minX + paddleRadius) then self.x = minX end
+		if (self.x > maxX - paddleRadius) then self.x = maxX end
 	end
 
 	function botPaddle.enterFrame(self)
 		if (self.y > maxYBot) then self.y = maxYBot end
 		if (self.y < minYBot) then self.y = minYBot end
+		if (self.x < minX + paddleRadius) then self.x = minX end
+		if (self.x > maxX - paddleRadius) then self.x = maxX end
 	end
+
+
 end
 
 
