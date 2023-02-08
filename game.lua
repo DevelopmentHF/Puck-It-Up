@@ -120,6 +120,13 @@ function scene:create( event )
 	bot.y = display.screenOriginY + display.actualContentHeight
 	physics.addBody(bot, "static")
 
+	-- Middle line
+	local mid = display.newImageRect(backGroup,"sprites/greyWall.png", 10,600);
+	mid:rotate(90)
+	mid.x = display.screenOriginX;
+	mid.y = display.contentCenterY;
+	mid.alpha = 0.3
+
 	-- Add and enterFrame Listener to help limit movement
 	function topPaddle.enterFrame( self )
 		if (self.y < minYTop) then self.y = minYTop end
