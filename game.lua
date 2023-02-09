@@ -108,11 +108,17 @@ function scene:create( event )
 	right.y = 240
 	physics.addBody(right, "static")
 
-	local top = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
-	top:rotate(90)
-	top.x = display.screenOriginX
-	top.y = display.screenOriginY
-	physics.addBody(top, "static")
+	local topLeft = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
+	topLeft:rotate(90)
+	topLeft.x = display.contentCenterX - 350
+	topLeft.y = display.screenOriginY
+	physics.addBody(topLeft, "static")
+
+	local topRight = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
+	topRight:rotate(90)
+	topRight.x = display.contentCenterY + 275
+	topRight.y = display.screenOriginY
+	physics.addBody(topRight, "static")
 	
 	local bot = display.newImageRect(mainGroup,"sprites/greyWall.png", 10,600)
 	bot:rotate(90)
